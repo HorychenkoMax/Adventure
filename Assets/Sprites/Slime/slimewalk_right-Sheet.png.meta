@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 26ac853c08d22d548ae41df2b5b0bf29
+guid: 85e8eab3ae10574408b19ef60752c225
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,169 +110,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle_0
+      name: slimewalk_right-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.449679, y: 0.014366228}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd43486fd797fe44d9817f4e8b80604a
-      internalID: -223336008
+      spriteID: 5c514264498685a408f8c4e3a93f333a
+      internalID: -489656121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_1
+      name: slimewalk_right-Sheet_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 48
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.44775614, y: 0.012861502}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 847dd67ce76e5ef43abeb358ad9d56ed
-      internalID: -184577021
+      spriteID: 4ff31d5429d5c6648bbee4cee3860733
+      internalID: -1171969744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_2
+      name: slimewalk_right-Sheet_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 96
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.48729196, y: 0.012861502}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86e037909aa1828419a8bb942b6183b1
-      internalID: 1399674366
+      spriteID: 525b54788d07d8a4bab029896d693da8
+      internalID: -2086592224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_3
+      name: slimewalk_right-Sheet_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 144
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.4901158, y: 0.014273497}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cd6ace7a6d945b47b1abb6a037226c8
-      internalID: 806602913
+      spriteID: 32907b77d7b7756409318011e16b5b00
+      internalID: -358973468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_4
+      name: slimewalk_right-Sheet_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 192
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.48870406, y: 0.012861502}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7444c6303101ce418f1cc792e544109
-      internalID: -1070907343
+      spriteID: 5508d6c2f4f50994f9e92143da513974
+      internalID: 1099478504
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_5
+      name: slimewalk_right-Sheet_5
       rect:
         serializedVersion: 2
-        x: 640
+        x: 240
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.47317186, y: 0.011449506}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccb11a3608adfc74d8dd7e9b3ab933a8
-      internalID: 319190798
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f659238cb7507ff40becf2605916c114
-      internalID: 102821309
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 248863ecc2a1b3b40ba30530b89572d3
-      internalID: -299277955
+      spriteID: 3c02d52beef969b45917028952c371c6
+      internalID: 1947952965
       vertices: []
       indices: 
       edges: []
@@ -288,14 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle_0: -223336008
-      Idle_1: -184577021
-      Idle_2: 1399674366
-      Idle_3: 806602913
-      Idle_4: -1070907343
-      Idle_5: 319190798
-      Idle_6: 102821309
-      Idle_7: -299277955
+      slimewalk_right-Sheet_0: -489656121
+      slimewalk_right-Sheet_1: -1171969744
+      slimewalk_right-Sheet_2: -2086592224
+      slimewalk_right-Sheet_3: -358973468
+      slimewalk_right-Sheet_4: 1099478504
+      slimewalk_right-Sheet_5: 1947952965
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
