@@ -149,6 +149,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Combat"",
+            ""id"": ""77d1c0b5-7a0d-40f3-bf03-08a6fc1edbe0"",
+            ""actions"": [
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e3ecb91-9424-483a-81d7-1e2c5cf33d41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5b9b9bf0-9a63-47eb-9202-9dd4b1accead"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -156,6 +184,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        // Combat
+        m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
+        m_Combat_Attack = m_Combat.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -259,8 +290,58 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Combat
+    private readonly InputActionMap m_Combat;
+    private List<ICombatActions> m_CombatActionsCallbackInterfaces = new List<ICombatActions>();
+    private readonly InputAction m_Combat_Attack;
+    public struct CombatActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public CombatActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Attack => m_Wrapper.m_Combat_Attack;
+        public InputActionMap Get() { return m_Wrapper.m_Combat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CombatActions set) { return set.Get(); }
+        public void AddCallbacks(ICombatActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CombatActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CombatActionsCallbackInterfaces.Add(instance);
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+        }
+
+        private void UnregisterCallbacks(ICombatActions instance)
+        {
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+        }
+
+        public void RemoveCallbacks(ICombatActions instance)
+        {
+            if (m_Wrapper.m_CombatActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICombatActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CombatActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CombatActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CombatActions @Combat => new CombatActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface ICombatActions
+    {
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

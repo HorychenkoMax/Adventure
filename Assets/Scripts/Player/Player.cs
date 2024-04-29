@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
+
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
     [SerializeField] private float movingSpeed = 10f;
+    private Vector2 inputVector;
 
     private float minMovingSpeed = 0.1f;
     private bool isRunning = false;
@@ -19,7 +22,20 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    
+    private void Start()
+    {
+        GameInput.Instance.OnPlayerAttack += Player_OnPlayerAttack;
+    }
+
+    private void Player_OnPlayerAttack(object sender, System.EventArgs e)
+    {
+        ActiveWeapon.Instance.GetActiveWeapon().Attack();
+    }
+
+    private void Update()
+    {
+        inputVector = GameInput.Instance.GetMovementVector();
+    }
 
     private void FixedUpdate()
     {
@@ -28,7 +44,6 @@ public class Player : MonoBehaviour
 
     private void HandelMovement()
     {
-        Vector2 inputVector = GameInput.Instance.GetMovementVector();
         rb.MovePosition(rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime));
 
         if(Mathf.Abs(inputVector.x) > minMovingSpeed || Mathf.Abs(inputVector.y) > minMovingSpeed)
