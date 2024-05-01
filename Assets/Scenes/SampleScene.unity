@@ -1899,14 +1899,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 939689340653330961, guid: bcfd9ae8a0566244985467526931bb1b, type: 3}
-      propertyPath: _startingState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 939689340653330961, guid: bcfd9ae8a0566244985467526931bb1b, type: 3}
-      propertyPath: _isChasingEnemy
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3257689524314138897, guid: bcfd9ae8a0566244985467526931bb1b, type: 3}
       propertyPath: m_Name
       value: Skeleton
@@ -1950,14 +1942,6 @@ PrefabInstance:
     - target: {fileID: 6461004993832360237, guid: bcfd9ae8a0566244985467526931bb1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7028971046825210686, guid: bcfd9ae8a0566244985467526931bb1b, type: 3}
-      propertyPath: m_Height
-      value: 2.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7028971046825210686, guid: bcfd9ae8a0566244985467526931bb1b, type: 3}
-      propertyPath: m_Radius
-      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

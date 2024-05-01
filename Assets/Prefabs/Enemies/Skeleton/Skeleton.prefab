@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 864573451329915643}
   - component: {fileID: 7090506352891647201}
   - component: {fileID: 2752883643071196197}
+  - component: {fileID: 2347043784273982393}
   m_Layer: 0
   m_Name: SkeletonVisual
   m_TagString: Untagged
@@ -106,6 +107,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2347043784273982393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52155042896397621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d478b11930dc85418b2d2b5d310fc48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyAi: {fileID: 939689340653330961}
+  _enemyEntity: {fileID: 589186168841465864}
 --- !u!1 &3257689524314138897
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +132,7 @@ GameObject:
   - component: {fileID: 6461004993832360237}
   - component: {fileID: 6757790458259148247}
   - component: {fileID: 7028971046825210686}
+  - component: {fileID: 6108954141615262700}
   - component: {fileID: 1409112567234610140}
   - component: {fileID: 589186168841465864}
   - component: {fileID: 939689340653330961}
@@ -179,7 +195,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3257689524314138897}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -192,6 +208,62 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!60 &6108954141615262700
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257689524314138897}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.2840042, y: 2.6455197}
+      - {x: 1.2601352, y: 2.2217383}
+      - {x: 0.73909235, y: 1.2343922}
+      - {x: 0.021296382, y: 0.8824556}
+      - {x: 0.8084131, y: 0.52485144}
+      - {x: 1.4978071, y: 0.48745322}
+      - {x: 2.4649239, y: 0.5082612}
+      - {x: 3.159175, y: 0.7989092}
+      - {x: 3.6739774, y: 1.4022489}
+      - {x: 3.4625072, y: 2.1288967}
+      - {x: 2.8084993, y: 2.5030437}
+  m_UseDelaunayMesh: 0
 --- !u!61 &1409112567234610140
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -262,7 +334,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d168eef47cd034c9fbebfcdab46133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingState: 1
-  roamingDistanceMax: 7
-  roamingDistanceMin: 3
-  roamingTimerMax: 2
+  _startingState: 1
+  _roamingDistanceMax: 7
+  _roamingDistanceMin: 3
+  _roamingTimerMax: 2
+  _isChasingEnemy: 1
+  _chasingDistance: 4
+  _chasingSpeedMultiplier: 2
+  _attackRate: 2
+  _isAttackingEnemy: 1
+  _attackingDistance: 2

@@ -9,13 +9,21 @@ using UnityEngine.InputSystem.XR.Haptics;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private State _startingState;
+
     [SerializeField] private float _roamingDistanceMax = 7f;
     [SerializeField] private float _roamingDistanceMin = 3f;
     [SerializeField] private float _roamingTimerMax = 2f;
 
     [SerializeField] private bool _isChasingEnemy = false;
     [SerializeField] private float _chasingDistance = 4f;
-    private float _chasingSpeedMultiplayer = 2f;
+    [SerializeField] private float _chasingSpeedMultiplier = 2f;
+
+    [SerializeField] private float _attackRate = 2f;
+    [SerializeField] private bool _isAttackingEnemy = false;
+    [SerializeField] private float _attackingDistance = 2f;
+    private float _nextAttackTime = 0f;
+
+    
 
     private NavMeshAgent _navMeshAgent;
     private State _currentState;
@@ -26,6 +34,11 @@ public class EnemyAI : MonoBehaviour
     private float _roamingSpeed;
     private float _chasingSpeed;
 
+    private float _nextCheckDirectionTime = 0f;
+    private float _checkDirectionDuration = 0.1f;
+    private Vector3 _lastPosition;
+
+    public event EventHandler OnEnemyAttack;
     
 
     private enum State
@@ -45,13 +58,14 @@ public class EnemyAI : MonoBehaviour
         _currentState = _startingState;
 
         _roamingSpeed = _navMeshAgent.speed;
-        _chasingSpeed = _navMeshAgent.speed * _chasingSpeedMultiplayer;
+        _chasingSpeed = _navMeshAgent.speed * _chasingSpeedMultiplier;
     }
 
 
     private void Update()
     {
         StateHandle();
+        MoveDirectionHandler();
     }
 
     private void StateHandle()
@@ -72,17 +86,26 @@ public class EnemyAI : MonoBehaviour
                 SetCurrentState();
 
                 break;
-            case State.Attacking: break;
+            case State.Attacking:
+                AttackingTarget();
+                SetCurrentState();
+
+                break;
             case State.Death: break;
             default:
             case State.Idel: break;
         }
     }
 
+    public float GetRoamingAnimationSpeed()
+    {
+        return _navMeshAgent.speed / _roamingSpeed;
+    }
+
     private void SetCurrentState()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        State newState = State.Roaming;
+        State newState = _currentState;
 
         if (_isChasingEnemy)
         {
@@ -91,7 +114,15 @@ public class EnemyAI : MonoBehaviour
                 newState = State.Chasing;
             }
         }
-        
+
+        if (_isAttackingEnemy)
+        {
+            if(distanceToPlayer <= _attackingDistance)
+            {
+                newState = State.Attacking;
+            }
+        }
+
         if(newState != _currentState)
         {
             if(newState == State.Chasing)
@@ -102,6 +133,9 @@ public class EnemyAI : MonoBehaviour
             {
                 _roamingTime = 0f;
                 _navMeshAgent.speed = _roamingSpeed;
+            } else if (newState == State.Attacking)
+            {
+                _navMeshAgent.ResetPath();
             }
             _currentState = newState;
         }
@@ -125,11 +159,24 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void AttackingTarget()
+    {
+        if(Time.time > _nextAttackTime)
+        {
+            if (OnEnemyAttack != null)
+            {
+                OnEnemyAttack.Invoke(this, EventArgs.Empty);
+            }
+            _nextAttackTime = Time.time + _nextAttackTime;
+        }
+        
+    }
+
     private void Roaming()
     {
         _startingPosition = transform.position;
         _roamingPosition = GetRoamingPosition();
-        ChangeFacingDirection(_startingPosition, _roamingPosition);
+        //ChangeFacingDirection(_startingPosition, _roamingPosition);
         _navMeshAgent.SetDestination(_roamingPosition);
     }
 
@@ -147,6 +194,23 @@ public class EnemyAI : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
+    private void MoveDirectionHandler()
+    {
+        if(Time.time > _nextCheckDirectionTime)
+        {
+            if (IsRunning())
+            {
+                ChangeFacingDirection(_lastPosition, transform.position);
+            }else if(_currentState == State.Attacking)
+            {
+                ChangeFacingDirection(transform.position, Player.Instance.transform.position);
+            }
+
+            _lastPosition = transform.position;
+            _nextCheckDirectionTime = Time.time + _checkDirectionDuration;
         }
     }
 }
